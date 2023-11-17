@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto my-8 p-8 bg-halloween-dark shadow-md rounded-md">
+        <h1 class="text-2xl font-bold mb-4 text-halloween-orange text-center">Profile</h1>
+
+        {% if user %}
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    {% if user.profilePicture %}
+                        <img src="{{ user.profilePicture }}" alt="{{ user.duckname }}" class="rounded-md shadow-md">
+
+                    {% else %}
+                        <p class="text-gray-500">No profile picture available.</p>
+                    {% endif %}
+                </div>
+
+
+                <div class="flex flex-col justify-center">
+                    <dl>
+                        <div class="mb-4">
+                            <dt class="font-semibold text-halloween-orange">Email:</dt>
+                            <dd>{{ user.email }}</dd>
+                        </div>
+
+                        <div class="mb-4">
+                            <dt class="font-semibold text-halloween-orange">Firstname:</dt>
+                            <dd>{{ user.firstname }}</dd>
+                        </div>
+
+                        <div class="mb-4">
+                            <dt class="font-semibold text-halloween-orange">Lastname:</dt>
+                            <dd>{{ user.lastname }}</dd>
+                        </div>
+
+                        <div class="mb-4">
+                            <dt class="font-semibold text-halloween-orange">Duckname:</dt>
+                            <dd>{{ user.duckname }}</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-red-500">You are not logged in.</p>
+        {% endif %}
+    </div>
+{% endblock %}

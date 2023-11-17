@@ -1,0 +1,21 @@
+{%  extends 'base.html.twig' %}
+{% block title %}Modifier un Quack{% endblock %}
+{%  block body %}
+
+    <body class="bg-halloween-theme">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4 text-halloween-orange">Édition du Quack</h1>
+        <div class="bg-halloween-black p-6 rounded shadow-md">
+{{ form_start(form) }}
+            <div class="mb-4">
+                {{ form_widget(form.content, {'attr': {'class': 'w-full p-2 border rounded text-halloween-orange bg-halloween-black'}}) }}
+            </div>
+            <div class="mb-4">
+                <button class="btn btn-primary text-white p-2 rounded bg-primary">Enregistrer les modifications</button>
+            </div>
+{{ form_end(form) }}
+            <a href="{{ path('quack_list') }}" class="btn btn-halloween-secondary">Retour à la liste</a>
+        </div>
+    </div>
+</body>
+{%  endblock %}

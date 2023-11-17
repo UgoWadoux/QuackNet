@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommentController!{% endblock %}
+
+{% block body %}
+<style>
+    .quack-list{
+        list-style: none;
+        padding: 0;
+    }
+
+    .quack-item {
+        background-color: #E1E8ED;
+        border: 2px solid #C4C4C4;
+        padding: 10px;
+        margin: 10px auto;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 1200px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        text-align: left;
+    }
+</style>
+
+<div class="example-wrapper text-center">
+    <ul class ="quack-list mx-auto">
+    <li class="quack-item relative">
+
+        <small class="color text-black mb-2">{{ quack.author }}</small>
+        <p class="color text-black">{{ quack.content }}</p>
+        <small class="text-black block mb-2">(Créé le {{ quack.createdAt | date('d/m/Y H:i:s') }})</small>
+        {%  if quack.createdAt != quack.updatedAt %}
+            <small class="text-black block mb-2">(Modifié le {{ quack.updatedAt | date('d/m/Y H:i:s') }}</small>
+        {%  endif  %}
+        <div class="flex justify-end">
+            <a href="{{ path('quack-edit', {'id': quack.id}) }}" class="btn btn-primary">Modifier</a>
+            <a href="{{ path('quack_delete', {'id': quack.id}) }}" class="btn btn-danger">Supprimer</a>
+        </div>
+    </li>
+    </ul>
+    <a href="{{ path('add_comment', {'id': quack.id}) }}" class="btn btn-danger mt-4">Postez un commentaire</a>
+</div>
+
+
+    <div class="example-wrapper text-center">
+        <h1 class="text-2xl font-bold mb-4"> Commentaire : </h1>
+        <ul class ="quack-list mx-auto">
+            {% for comment  in comments %}
+                <li class="quack-item relative">
+                    <small class="color text-black mb-2">{{ quack.author }}</small>
+                    <p class="color text-black">{{ comment.content }}</p>
+                    <small class="text-black block mb-2">(Créé le {{ comment.createdAt | date('d/m/Y H:i:s') }})</small>
+                    {%  if comment.createdAt != comment.updatedAt %}
+                        <small class="text-black block mb-2">(Modifié le {{ comment.updatedAt | date('d/m/Y H:i:s') }}</small>
+                    {%  endif  %}
+                    <div class="flex justify-end">
+                        <a href="{{ path('quack-edit', {'id': comment.id}) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ path('quack_delete', {'id': comment.id}) }}" class="btn btn-danger">Supprimer</a>
+{#                        <a href="{{ path('app_comment', {'id' :quack.id}) }}" class=" btn btn-primary">Commentaire(s)</a>#}
+                    </div>
+
+                </li>
+            {% endfor %}
+<        </ul>
+    </div>
+{% endblock %}
