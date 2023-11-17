@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div>
+        <p>Bonjour {{ app.user.duckname }}</p>
+        {{ form_start(form) }}
+        <div class="">
+            <div>
+                {{ form_label(form.duckname) }}
+                {{ form_widget(form.duckname) }}
+            </div>
+            <div>
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div>
+                {{ form_label(form.firstname) }}
+                {{ form_widget(form.firstname) }}
+            </div>
+            <div>
+                {{ form_label(form.lastname) }}
+                {{ form_widget(form.lastname) }}
+            </div>
+            <div>
+                {{ form_label(form.profilePicture) }}
+                {{ form_widget(form.profilePicture) }}
+            </div>
+            <div>
+                {{ form_label(form.password) }}
+                {{ form_widget(form.password) }}
+            </div>
+        </div>
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

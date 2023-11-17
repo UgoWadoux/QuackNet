@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>Créer un nouveau compte !</h1>
+{{ form_start(form, {'attr': {'class': 'flex flex-col items-center'}}) }}
+<div class=" flex items-center flex-col w-3/5">
+    <div>
+        {{ form_label(form.duckname) }}
+        {{ form_widget(form.duckname, {'attr':{'class': 'solid border my-2'}}) }}
+    </div>
+    <div>
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email,{'attr':{'class': 'solid border my-2'}}) }}
+    </div>
+    <div>
+        {{ form_label(form.firstname) }}
+        {{ form_widget(form.firstname, {'attr':{'class': 'solid border my-2'}}) }}
+    </div>
+    <div>
+        {{ form_label(form.lastname) }}
+        {{ form_widget(form.lastname, {'attr':{'class': 'solid border my-2'}}) }}
+    </div>
+    <div>
+        {{ form_label(form.profilePicture) }}
+        {{ form_widget(form.profilePicture, {'attr':{'class': 'solid border my-2'}}) }}
+    </div>
+    <div>
+        {{ form_label(form.password) }}
+        {{ form_widget(form.password, {'attr':{'class': 'solid border my-2'}}) }}
+    </div>
+</div>
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+{% endblock %}

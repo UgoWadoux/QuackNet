@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="flex justify-center">
+        <h2 class=" flex justify-center">List de tous les Quack</h2>
+    </div>
+    <ul class="flex items-center flex-col gap-3.5">
+            <div class=" card w-3/5 bg-base-100 shadow-xl ">
+                <div class="card-body">
+                    {#                <h2 class="card-title">{{ quack.id }}</h2> #}
+                    <div class="flex flex-row items-center">
+                        <img src="{{ quack.duckProfilePicture }}" alt="{{ quack.duckProfilePicture }}" class="w-48">
+                        <p>{{ quack.author }}</p>
+                    </div>
+
+                    <p>{{ quack.content }}</p>
+                    {% if  quack.imgSrc!='' %}
+                        <img src="{{ quack.imgSrc }}" alt="{{ quack.imgSrc }}">
+                    {% endif %}
+                    {%if app.user %}
+                        {% if quack.duckID == app.user.id %}
+                            <div class="card-actions justify-end">
+
+                                <a href="{{ path('delete_quack', {'id':quack.id}) }}">
+                                    <button class="btn">Supprimer</button>
+                                </a>
+                                <a href="{{ path('modify_quack', {'id':quack.id}) }}">
+                                    <button class="btn">Modifier le quack</button>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    <ul>
+                        <li>{{ quack.createdAt|date("d/m/Y") }}</li>
+
+                    </ul>
+                    <a href="{{ path('app_comment', {'id': quack.id}) }}">Commentaire</a>
+                </div>
+            </div>
+
+    </ul>
+    <h2 class="flex justify-center text-xl my-4">Commentaires</h2>
+    <ul class="flex items-center flex-col gap-3.5">
+        {% for comment in comments %}
+            <div class=" card w-3/5 bg-base-100 shadow-xl ">
+            <div class="card-body">
+        <h2 class="card-title">{{ quack.id }}</h2>
+                <div class="flex flex-row items-center">
+                    <img src="{{ comment.duckProfilePicture }}" alt="{{ comment.duckProfilePicture }}" class="w-48">
+                    <p>{{ comment.author }}</p>
+                </div>
+
+                <p>{{ comment.content }}</p>
+                {% if  comment.imgSrc!='' %}
+                    <img src="{{ comment.imgSrc }}" alt="{{ comment.imgSrc }}">
+                {% endif %}
+                {%if app.user %}
+                    {% if ((comment.duckID == app.user.id) or (quack.duckID == app.user.id))%}
+                        <div class="card-actions justify-end">
+
+                            <a href="{{ path('delete_quack', {'id':comment.id}) }}">
+                                <button class="btn">Supprimer</button>
+                            </a>
+                            <a href="{{ path('modify_quack', {'id':comment.id}) }}">
+                                <button class="btn">Modifier le commentaire</button>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                <ul>
+                    <li>{{ comment.createdAt|date("d/m/Y") }}</li>
+
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+
+    </ul>
+
+
+    <a href="{{ path('app_addComment', {'id': quack.id}) }}" class="flex justify-center gap-3.5 mb-8">
+        <button class="btn btn-primary">Comment !</button>
+    </a>
+{% endblock %}
+
+

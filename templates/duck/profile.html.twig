@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div>
+    <p>{{ duck.duckname }}</p>
+    <img src="{{ duck.profilePicture }}" alt="{{ duck.profilePicture }}" class="w-96">
+    <p>{{ duck.firstname }}</p>
+    <p>{{ duck.lastname }}</p>
+</div>
+{% endblock %}
