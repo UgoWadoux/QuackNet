@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="flex justify-center ">
+{#        <h2 class=" flex justify-center">List de tous les Quack</h2>#}
+        <div>
+            {% include 'search/index.html.twig' with {
+                form:form
+            } only %}
+        </div>
+    </div>
+    <ul class="flex items-center flex-col gap-3.5">
+        {% for quack in quacks %}
+            {% if quack.parentsId==''  and quack.display == true %}
+                <div class=" card w-3/5 bg-base-100 shadow-xl ">
+                    <div class="card-body">
+                        {#                <h2 class="card-title">{{ quack.id }}</h2> #}
+                        <div class="flex flex-row items-center">
+                            <img src="{{ quack.duckProfilePicture }}" alt="{{ quack.duckProfilePicture }}" class="w-48">
+                            <p><a href="{{ path('app_profile', {'id': quack.duckID}) }}">{{ quack.author }}</a></p>
+                        </div>
+
+                        <p>{{ quack.content }}</p>
+                        {% if  quack.imgSrc!='' %}
+                            <img src="{{ quack.imgSrc }}" alt="{{ quack.imgSrc }}">
+                        {% endif %}
+                        {% if app.user %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('app_quack_display', {'id': quack.id}) }}">
+                                    <button class="btn">Masquer le Quack</button>
+                                </a>
+                            {% endif %}
+                            {% if quack.duckID == app.user.id %}
+                                <div class="card-actions justify-end">
+
+                                    <a href="{{ path('delete_quack', {'id':quack.id}) }}">
+                                        <button class="btn">Supprimer</button>
+                                    </a>
+
+                                    <a href="{{ path('modify_quack', {'id':quack.id}) }}">
+                                        <button class="btn">Modifier le quack</button>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        <ul>
+                            <li>{{ quack.createdAt|date("d/m/Y") }}</li>
+
+                        </ul>
+                        <a href="{{ path('app_comment', {'id': quack.id}) }}">Commentaire</a>
+                    </div>
+                </div>
+
+
+                <br>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <a href="{{ path('add_quackForm') }}" class="flex justify-center gap-3.5 mb-8">
+        <button class="btn btn-primary">Quacker !</button>
+    </a>
+{% endblock %}
+
+

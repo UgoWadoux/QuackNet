@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+
+{% endblock %}
+{% block body %}
+    <div class="flex justify-center">
+
+
+        {{ form_start(form, {'attr':{'class':'w-full flex flex-col items-center'}}) }}
+        {{ form_errors(form) }}
+        <h2 class="card-title flex justify-center">Nouveau Quack !</h2>
+        {{ form_widget(form.content, {'attr':{'class': ' w-3/5 textarea textarea-error'}}) }}
+        <div>
+            {{ form_label(form.imgSrc) }}
+            {{ form_widget(form.imgSrc, {'attr':{'class': 'w-96 textarea textarea-error'}}) }}
+
+        </div>
+        <div>
+            {{ form_label(form.tags) }}
+            {{ form_widget(form.tags, {'attr':{'class': 'w-96 textarea textarea-error'}}) }}
+        </div>
+        {{ form_row(form.save, {'attr':{'class':' btn btn-primary bg-primary text-white'  }}) }}
+        {{ form_end(form) }}
+
+
+    </div>
+    {#    <div class="flex justify-center"> #}
+    {#        <div class="w-3/5 bg-primary flex justify-center"> #}
+    {#            <div> #}
+    {#                {{ form(form) }} #}
+    {#            </div> #}
+
+    {#        </div> #}
+    {#    </div> #}
+
+    {% endblock %}
